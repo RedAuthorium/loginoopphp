@@ -3,6 +3,13 @@
 require_once "core/init.php";
 require_once "templates/header.php";
 
+if ( Input::Get('submit')){
+    $user->register_user(array(
+        'username' => Input::Get('username'),
+        'password' => password_hash(Input::Get('password'), PASSWORD_DEFAULT),
+    ));
+}
+
 ?>
 
 <h2>Register</h2>
