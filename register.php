@@ -3,11 +3,26 @@
 require_once "core/init.php";
 require_once "templates/header.php";
 
-if ( Input::Get('submit')){
+$validation = new Validation();
+$validation = $validation->check(array(
+    'username' => array(
+                        'required' => true,
+                        'min' => 5,
+                        'max' => 11
+                  ),
+    'password' => array(
+                        'required' => true,
+                        'min' => 5,
+                  )
+));
+
+if ( $validation->passed() ){
     $user->register_user(array(
-        'username' => Input::Get('username'),
-        'password' => password_hash(Input::Get('password'), PASSWORD_DEFAULT),
+        'username' => Input::get('username'),
+        'password' => password_hash(Input::get('password'), PASSWORD_DEFAULT),
     ));
+}else {
+    print_r($validation->errors());
 }
 
 ?>
