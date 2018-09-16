@@ -10,11 +10,11 @@ $validation = $validation->check(array(
     'username' => array(
                         'required' => true,
                         'min' => 5,
-                        'max' => 11
+                        'max' => 15
                   ),
     'password' => array(
                         'required' => true,
-                        'min' => 5,
+                        'min' => 3,
                   )
 ));
 
@@ -23,6 +23,9 @@ if ( $validation->passed() ){
         'username' => Input::get('username'),
         'password' => password_hash(Input::get('password'), PASSWORD_DEFAULT),
     ));
+
+    Session::set('username', Input::get('username'));
+    header('location: profile.php');
 }else {
     $errors = $validation->errors();
 }
