@@ -3,7 +3,9 @@
 require_once "core/init.php";
 require_once "templates/header.php";
 
+$errors = array();
 $validation = new Validation();
+
 $validation = $validation->check(array(
     'username' => array(
                         'required' => true,
@@ -22,7 +24,7 @@ if ( $validation->passed() ){
         'password' => password_hash(Input::get('password'), PASSWORD_DEFAULT),
     ));
 }else {
-    print_r($validation->errors());
+    $errors = $validation->errors();
 }
 
 ?>
@@ -34,6 +36,13 @@ if ( $validation->passed() ){
     <label>Password</label>
     <input type="password" name="password"> <br>
     <input type="submit" name="submit" value="Join Now!!!">
+    <?php if(!empty($errors)){ ?>
+        <div id="errors">
+            <?php foreach ($errors as $error) { ?>
+            <li><?php echo $error; ?></li>
+            <?php } ?>
+        </div>
+    <?php } ?>
 </form>
 
 <?php
