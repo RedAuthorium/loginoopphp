@@ -16,7 +16,7 @@ $validation = $validation->check(array(
             Session::set('username', Input::get('username'));
             header('location: profile.php');
         }else{
-            echo "Login gagal";
+            $errors [] = "Login failed!";
         }
     }else{
         $errors = $validation->errors();
