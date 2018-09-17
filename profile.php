@@ -4,7 +4,7 @@ require_once "core/init.php";
 
 if(!Session::exist('username')){
     Session::flash('flashlogin', 'You should login to access this page!');
-    header("location: login.php");
+    Redirect::to('login');
 }
 
 if(Session::exist('flashprofile')){

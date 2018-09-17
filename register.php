@@ -3,7 +3,7 @@
 require_once "core/init.php";
 
 if(Session::exist('username')){
-    header("location: profile.php");
+    Redirect::to('profile');
 }
 
 $errors = array();
@@ -38,7 +38,7 @@ if(Input::get('submit')){
 
             Session::flash('flashprofile', 'Congratulations! Your account is ready!');
             Session::set('username', Input::get('username'));
-            header('location: profile.php');
+            Redirect::to('profile');
         }else {
             $errors = $validation->errors();   
         }

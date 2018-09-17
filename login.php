@@ -3,7 +3,7 @@
 require_once "core/init.php";
 
 if(Session::exist('username')){
-    header("location: profile.php");
+    Redirect::to('profile');
 }
 
 if(Session::exist('flashlogin')){
@@ -23,7 +23,7 @@ if(Input::get('submit')){
         if( $user->check_name(Input::get('username')) ){
             if( $user->login_user(Input::get('username'), Input::get('password'))){
                 Session::set('username', Input::get('username'));
-                header('location: profile.php');
+                Redirect::to('profile');
             }else{
                 $errors [] = "Wrong Password!";
             }
