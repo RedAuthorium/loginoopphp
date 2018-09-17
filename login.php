@@ -1,7 +1,10 @@
 <?php
 
 require_once "core/init.php";
-require_once "templates/header.php";
+
+if(Session::exist('username')){
+    header("location: profile.php");
+}
 
 $errors = array();
 $validation = new Validation();
@@ -27,6 +30,8 @@ $validation = $validation->check(array(
             $errors = $validation->errors();
         }
 
+
+require_once "templates/header.php";
 ?>
 
 <h2>Login</h2>

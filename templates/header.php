@@ -11,8 +11,12 @@
     <header>
         <h1><center>Learning PHP OOP</center></h1>
         <nav>
-            <a href="login.php">Login</a>
-            <a href="register.php">Register</a>
-            <a href="profile.php">Profile</a>
+            <?php if(Session::exist('username')){ ?>
+                <a href="logout.php">LogOut</a>
+            <?php }else{ ?>
+                <a href="login.php">Login</a>
+                <a href="register.php">Register</a>
+            <?php } ?>
+                <a href="profile.php">Profile</a>
         </nav>
     </header>
