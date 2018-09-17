@@ -9,6 +9,7 @@ class Validation{
     {
         foreach ($items as $item => $rules) {
             foreach ($rules as $rule => $ruleValues) {
+                
                 switch ($rule) {
                     case 'required':
                         if (trim(Input::get($item)) == false && $ruleValues == true) {
@@ -25,7 +26,12 @@ class Validation{
                             $this->addError("$item username maximum 11 characters");
                         }
                         break;
-                        
+                    case 'match':
+                        if (Input::get($item) != Input::get($ruleValues)) {
+                            $this->addError("Password Should be same!");
+                        }
+                        break;
+
                     default:
                         break;
                 }

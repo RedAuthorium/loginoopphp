@@ -9,10 +9,11 @@ if(Session::exist('username')){
 $errors = array();
 $validation = new Validation();
 
-$validation = $validation->check(array(
-    'username' => array('required' => true),
-    'password' => array('required' => true)
-));
+if(Input::get('submit')){
+    $validation = $validation->check(array(
+        'username' => array('required' => true),
+        'password' => array('required' => true)
+    ));
 
     if ( $validation->passed() ){
         if( $user->check_name(Input::get('username')) ){
@@ -28,8 +29,8 @@ $validation = $validation->check(array(
             
         }else{
             $errors = $validation->errors();
-        }
-
+    }
+}
 
 require_once "templates/header.php";
 ?>
