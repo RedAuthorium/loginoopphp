@@ -6,6 +6,10 @@ if(Session::exist('username')){
     header("location: profile.php");
 }
 
+if(Session::exist('flashlogin')){
+    echo Session::flash('flashlogin');
+}
+
 $errors = array();
 $validation = new Validation();
 
@@ -25,9 +29,8 @@ if(Input::get('submit')){
             }
         }else{
             $errors [] = "The username is not registered yet";
-        }
-            
-        }else{
+        }        
+    }else{
             $errors = $validation->errors();
     }
 }

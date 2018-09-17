@@ -1,8 +1,14 @@
 <?php
 
 require_once "core/init.php";
+
 if(!Session::exist('username')){
-    header("location: register.php");
+    Session::flash('flashlogin', 'You should login to access this page!');
+    header("location: login.php");
+}
+
+if(Session::exist('flashprofile')){
+    echo Session::flash('flashprofile');
 }
 
 require_once "templates/header.php";

@@ -36,6 +36,7 @@ if(Input::get('submit')){
                 'password' => password_hash(Input::get('password'), PASSWORD_DEFAULT),
             ));
 
+            Session::flash('flashprofile', 'Congratulations! Your account is ready!');
             Session::set('username', Input::get('username'));
             header('location: profile.php');
         }else {
