@@ -23,6 +23,16 @@ class User{
             return false;
         }
     }
+
+    public function check_name($username)
+    {
+        $data = $this->_db->get_info('users', 'username', $username);
+        if (empty($data)) {
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
 
 

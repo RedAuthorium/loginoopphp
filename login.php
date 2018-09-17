@@ -12,15 +12,20 @@ $validation = $validation->check(array(
 ));
 
     if ( $validation->passed() ){
-        if($user->login_user(Input::get('username'), Input::get('password'))){
-            Session::set('username', Input::get('username'));
-            header('location: profile.php');
+        if( $user->check_name(Input::get('username')) ){
+            if( $user->login_user(Input::get('username'), Input::get('password'))){
+                Session::set('username', Input::get('username'));
+                header('location: profile.php');
+            }else{
+                $errors [] = "Wrong Password!";
+            }
         }else{
-            $errors [] = "Login failed!";
+            $errors [] = "The username is not registered yet";
         }
-    }else{
-        $errors = $validation->errors();
-}
+            
+        }else{
+            $errors = $validation->errors();
+        }
 
 ?>
 
