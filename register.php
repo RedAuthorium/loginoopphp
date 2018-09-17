@@ -21,17 +21,21 @@ $validation = $validation->check(array(
                   )
 ));
 
-if ( $validation->passed() ){
-    $user->register_user(array(
-        'username' => Input::get('username'),
-        'password' => password_hash(Input::get('password'), PASSWORD_DEFAULT),
-    ));
+    if( $user->check_name(Input::get('username')) ){
+        $errors [] = "Name already registered!";
+    }else {
+        if ( $validation->passed() ){
+            $user->register_user(array(
+                'username' => Input::get('username'),
+                'password' => password_hash(Input::get('password'), PASSWORD_DEFAULT),
+            ));
 
-    Session::set('username', Input::get('username'));
-    header('location: profile.php');
-}else {
-    $errors = $validation->errors();
-}
+            Session::set('username', Input::get('username'));
+            header('location: profile.php');
+        }else {
+            $errors = $validation->errors();
+        }
+    }
 
 require_once "templates/header.php";
 
@@ -41,9 +45,12 @@ require_once "templates/header.php";
 <form action="register.php" method="POST">
     <label>Username</label>
     <input type="text" name="username"> <br>
+
     <label>Password</label>
     <input type="password" name="password"> <br>
+    
     <input type="submit" name="submit" value="Join Now!!!">
+
     <?php if(!empty($errors)){ ?>
         <div id="errors">
             <?php foreach ($errors as $error) { ?>
