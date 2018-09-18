@@ -27,6 +27,8 @@ require_once "templates/header.php";
 
 <?php if ($user->is_admin(Session::get('username'))) { ?>
 You see this text? So you are an Admin now!!
+<br>
+<a href="admin.php">Admin Page</a>
 <?php }else if($user->is_premiUser(Session::get('username'))){ ?>
 You are Premium User now!!
 <?php } ?>

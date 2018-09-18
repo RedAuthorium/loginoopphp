@@ -80,6 +80,11 @@ class User{
             return false;
         }
     }
+
+    public function get_users($table)
+    {
+        return $this->_db->get_info($table);
+    }
 }
 
 
