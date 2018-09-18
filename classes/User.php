@@ -62,6 +62,15 @@ class User{
             return false;
         }
     }
+
+    public function get_data($username)
+    {
+        if($this->check_name($username)){
+            return $data = $this->_db->get_info('users', 'username', $username);
+        }else {
+            return false;
+        }
+    }
 }
 
 

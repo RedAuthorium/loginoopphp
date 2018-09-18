@@ -11,11 +11,13 @@ if(Session::exist('flashprofile')){
     echo Session::flash('flashprofile');
 }
 
+$user_data = $user->get_data(Session::get('username'));
+
 require_once "templates/header.php";
 
 ?>
 
-<h1><?php echo "Selamat datang " . Session::get('username'); ?></h1>
+<h1><?php echo  "Welcome ! <br>"  . $user_data['username']; ?></h1>
 
 <?php if ($user->is_admin(Session::get('username'))) { ?>
 You see this text? So you are an Admin now!!
