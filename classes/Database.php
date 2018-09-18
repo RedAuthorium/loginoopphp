@@ -47,6 +47,26 @@ class Database{
         return $this->run_query($sql, 'You have an issue when input data');
     }
 
+    public function update($table, $fields, $id)
+    {
+        $valueArrays = array();
+        $i = 0;
+
+        foreach ($fields as $key => $values) {
+            if ( is_int($values) ) {
+                $valueArrays[$i] = $key . "=" . $this->escape($values);
+            }else{
+                $valueArrays[$i] = $key . "='" . $this->escape($values) . "'";
+            }
+            $i++;
+        }
+
+        $values = implode(", ", $valueArrays);
+        
+        $sql = "UPDATE $table SET $values WHERE id = $id";
+        return $this->run_query($sql, 'You have an issue when update data');
+    }
+
     public function get_info($table, $column, $value)
     {
         if( !is_int($value)){

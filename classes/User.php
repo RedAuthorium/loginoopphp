@@ -68,6 +68,15 @@ class User{
         if($this->check_name($username)){
             return $data = $this->_db->get_info('users', 'username', $username);
         }else {
+            return die($username . 'cannot be found!');
+        }
+    }
+
+    public function update_user($fields = array(), $id)
+    {
+        if($this->_db->update('users', $fields, $id)){
+            return true;
+        }else {
             return false;
         }
     }

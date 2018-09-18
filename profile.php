@@ -24,5 +24,7 @@ You see this text? So you are an Admin now!!
 <?php }else if($user->is_premiUser(Session::get('username'))){ ?>
 You are Premium User now!!
 <?php } ?>
+<br>
+<a href="change_password.php">Change Password</a>
 
 <?php require_once "templates/footer.php"; ?>
