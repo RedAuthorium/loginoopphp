@@ -14,6 +14,8 @@ $errors = array();
 $validation = new Validation();
 
 if(Input::get('submit')){
+    if(Token::check(Input::get('token'))){
+
     $validation = $validation->check(array(
         'username' => array('required' => true),
         'password' => array('required' => true)
@@ -34,6 +36,7 @@ if(Input::get('submit')){
             $errors = $validation->errors();
     }
 }
+}
 
 require_once "templates/header.php";
 ?>
@@ -42,9 +45,14 @@ require_once "templates/header.php";
 <form action="login.php" method="POST">
     <label>Username</label>
     <input type="text" name="username"> <br>
+
     <label>Password</label>
     <input type="password" name="password"> <br>
+
+    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"> <br>
+    
     <input type="submit" name="submit" value="Login">
+
     <?php if(!empty($errors)){ ?>
         <div id="errors">
             <?php foreach ($errors as $error) { ?>
