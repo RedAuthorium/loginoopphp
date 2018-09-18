@@ -53,6 +53,15 @@ class User{
             return false;
         }
     }
+
+    public function is_loggedIn()
+    {
+        if (Session::exist('username')) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
 
 

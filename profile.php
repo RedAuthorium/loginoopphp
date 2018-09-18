@@ -2,7 +2,7 @@
 
 require_once "core/init.php";
 
-if(!Session::exist('username')){
+if(!$user->is_loggedIn()){
     Session::flash('flashlogin', 'You should login to access this page!');
     Redirect::to('login');
 }
