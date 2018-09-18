@@ -33,6 +33,26 @@ class User{
             return true;
         }
     }
+
+    public function is_admin($username)
+    {
+        $data = $this->_db->get_info('users', 'username', $username);
+        if ($data['role'] == 1) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function is_premiUser($username)
+    {
+        $data = $this->_db->get_info('users', 'username', $username);
+        if ($data['role'] == 2) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 
