@@ -11,7 +11,6 @@ class Database{
 
     public function __construct()
     {
-
         $this->mysqli = new mysqli($this->HOST, $this->USER, $this->PASS, $this->DBNAME);
         if ($this->mysqli == mysqli_connect_error()) {
             echo 'gagal koneksi ke database';
